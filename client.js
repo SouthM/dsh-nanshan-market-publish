@@ -16,14 +16,15 @@ window.__ModuleLoader__.load({
 
     const DICTIONARIES = {
       zh: {
-        'nav.title': '【南山】DSH插件市场发布',
+        'nav.title': '【南山】DSH插件市场发布助手',
         'page.eyebrow': 'DSH · 插件市场发布',
-        'page.title': '【南山】DSH插件市场发布',
+        'page.title': '【南山】DSH插件市场发布助手',
         'page.subtitle': '扫描本机正在开发的 DSH 组件，按官方 contributing.md 的要求分两条轨道：把代码提交到 GitHub，再申请市场收录 PR。两条轨道各有独立的进度与按钮。',
         'page.doc': '官方 contributing.md',
-        'tab.components': '组件',
-        'tab.guide': '引导',
-        'tab.records': '记录',
+        'tabs.label': '面板页签',
+        'tab.components': '组件清单',
+        'tab.guide': '发布引导',
+        'tab.records': '发布记录',
         'tab.settings': '设置',
         'auth.connected': '已连接',
         'auth.envToken': '已连接（环境变量 Token）',
@@ -166,7 +167,7 @@ window.__ModuleLoader__.load({
         'guide.title': '傻瓜式引导',
         'guide.subtitle': '两条轨道各有独立的进度和按钮：可以先把代码推到 GitHub，之后再回来补收录 PR。收录 PR 需要仓库已公开、带 dsh-plugin topic，且创建满 1 天。',
         'guide.pick': '先选一个组件',
-        'guide.pickHint': '从「组件」页选一个组件，或者直接在下面点一个。',
+        'guide.pickHint': '从「组件清单」页选一个组件，或者直接在下面点一个。',
         'guide.next': '下一步',
         'guide.allDone': '这一轮都完成了',
         'guide.allDoneHint': 'PR 已提交，剩下的就是等维护者评审。CI 通过是前置条件，不是结论。',
@@ -253,7 +254,7 @@ window.__ModuleLoader__.load({
         'error.noToken': '还没有连接 GitHub：先在「设置」里填入 Token。',
         'server.token-missing': '还没有连接 GitHub：先在「设置」里填入 Token。',
         'server.no-credentials': '当前档案没有可用的凭据服务，无法保存 Token。',
-        'server.not-listed': '这个目录不在组件清单里：先在「组件」页添加它。',
+        'server.not-listed': '这个目录不在组件清单里：先在「组件清单」页添加它。',
         'server.bad-dir': '需要一个存在的绝对目录路径。',
         'server.not-component': '这个目录不是 DSH 组件（package.json 缺少 dsh.bundle / dsh.client）。',
         'server.repo-too-young': '仓库创建不满 1 天：官方要求满 1 天后才能提交收录 PR。',
@@ -290,14 +291,15 @@ window.__ModuleLoader__.load({
         'common.close': '关闭',
       },
       en: {
-        'nav.title': 'Nanshan DSH Market Publish',
+        'nav.title': 'Nanshan DSH Market Publish Assistant',
         'page.eyebrow': 'DSH · Market publish',
-        'page.title': 'Nanshan DSH Market Publish',
+        'page.title': 'Nanshan DSH Market Publish Assistant',
         'page.subtitle': 'Scans DSH components under development on this machine and follows the official contributing.md in two tracks: push the code to GitHub, then open the market listing PR. Each track has its own progress and buttons.',
         'page.doc': 'Official contributing.md',
-        'tab.components': 'Components',
-        'tab.guide': 'Guide',
-        'tab.records': 'History',
+        'tabs.label': 'Panel sections',
+        'tab.components': 'Component list',
+        'tab.guide': 'Publish guide',
+        'tab.records': 'Publish history',
         'tab.settings': 'Settings',
         'auth.connected': 'Connected',
         'auth.envToken': 'Connected (env token)',
@@ -440,7 +442,7 @@ window.__ModuleLoader__.load({
         'guide.title': 'Guided flow',
         'guide.subtitle': 'Each track has its own progress and buttons: push the code to GitHub first, then come back for the listing PR whenever you like. The PR needs a public repository with the dsh-plugin topic, at least one day old.',
         'guide.pick': 'Pick a component first',
-        'guide.pickHint': 'Select one on the Components tab, or pick one below.',
+        'guide.pickHint': 'Select one on the Component list tab, or pick one below.',
         'guide.next': 'Next step',
         'guide.allDone': 'This round is complete',
         'guide.allDoneHint': 'The PR is open; what remains is maintainer review. A green CI run is a precondition, not the decision.',
@@ -527,7 +529,7 @@ window.__ModuleLoader__.load({
         'error.noToken': 'GitHub is not connected yet. Add a token under Settings.',
         'server.token-missing': 'GitHub is not connected yet. Add a token under Settings.',
         'server.no-credentials': 'This profile has no credential service, so the token cannot be stored.',
-        'server.not-listed': 'This folder is not in the component list. Add it on the Components tab first.',
+        'server.not-listed': 'This folder is not in the component list. Add it on the Component list tab first.',
         'server.bad-dir': 'An existing absolute folder path is required.',
         'server.not-component': 'This folder is not a DSH component (no dsh.bundle / dsh.client in package.json).',
         'server.repo-too-young': 'The repository is younger than 1 day; the guide requires a day before a listing PR.',
@@ -853,7 +855,7 @@ window.__ModuleLoader__.load({
           key: option.value,
           type: 'button',
           className: 'nmp-segmented__item',
-          'data-on': String(props.value === option.value),
+          'aria-pressed': String(props.value === option.value),
           onClick: () => props.onChange(option.value),
         }, option.label)),
       )
@@ -1642,10 +1644,10 @@ window.__ModuleLoader__.load({
 
       function renderTabs() {
         const tabs = [
-          { id: 'components', label: t('tab.components'), count: components.length },
-          { id: 'guide', label: t('tab.guide') },
-          { id: 'records', label: t('tab.records'), count: (overview?.records || []).length },
-          { id: 'settings', label: t('tab.settings'), dot: !connected },
+          { id: 'components', label: t('tab.components'), icon: 'list', count: components.length },
+          { id: 'guide', label: t('tab.guide'), icon: 'sparkle' },
+          { id: 'records', label: t('tab.records'), icon: 'clock', count: (overview?.records || []).length },
+          { id: 'settings', label: t('tab.settings'), icon: 'settings', dot: !connected },
         ]
         const onKeyDown = (event) => {
           if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft' && event.key !== 'Home' && event.key !== 'End') return
@@ -1660,7 +1662,7 @@ window.__ModuleLoader__.load({
           const buttons = event.currentTarget.querySelectorAll('[role="tab"]')
           if (buttons[nextIndex] && typeof buttons[nextIndex].focus === 'function') buttons[nextIndex].focus()
         }
-        return h('nav', { className: 'nmp-tabbar', role: 'tablist', onKeyDown },
+        return h('nav', { className: 'nmp-tabbar', role: 'tablist', 'aria-label': t('tabs.label'), onKeyDown },
           tabs.map((item) => h('button', {
             key: item.id,
             id: `nmp-tab-${item.id}`,
@@ -1670,10 +1672,10 @@ window.__ModuleLoader__.load({
             'aria-controls': `nmp-panel-${item.id}`,
             tabIndex: tab === item.id ? 0 : -1,
             className: 'nmp-tab',
-            'data-on': String(tab === item.id),
             onClick: () => setTab(item.id),
           },
-            item.label,
+            h(Icon, { name: item.icon, size: 13 }),
+            h('span', { className: 'nmp-tab__label' }, item.label),
             item.count ? h('span', { className: 'nmp-tab__count' }, String(item.count)) : null,
             item.dot ? h('span', { className: 'nmp-tab__dot', 'aria-hidden': 'true', title: t('auth.notConnected') }) : null,
           )),
@@ -1852,9 +1854,9 @@ window.__ModuleLoader__.load({
             }),
           ),
           h('div', { className: 'nmp-states' },
-            h('span', { className: 'nmp-state', 'data-on': String(ready.local) }, t('gh.state.local')),
-            h('span', { className: 'nmp-state', 'data-on': String(ready.remote) }, t('gh.state.remote')),
-            h('span', { className: 'nmp-state', 'data-on': String(ready.topic) }, t('gh.state.topic')),
+            h('span', { className: 'nmp-state', 'data-on': ready.local ? '1' : '0' }, t('gh.state.local')),
+            h('span', { className: 'nmp-state', 'data-on': ready.remote ? '1' : '0' }, t('gh.state.remote')),
+            h('span', { className: 'nmp-state', 'data-on': ready.topic ? '1' : '0' }, t('gh.state.topic')),
           ),
           h('div', { className: 'nmp-actions' },
             h(Btn, {
@@ -2653,12 +2655,20 @@ window.__ModuleLoader__.load({
 .nmp-auth__state{font-size:9.5px;color:var(--nmp-muted);letter-spacing:.02em}
 
 /* tabs */
-.nmp-tabbar{display:flex;gap:2px;margin-top:26px;border-bottom:1px solid var(--nmp-line)}
-.nmp-tab{appearance:none;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border:0;border-bottom:1.5px solid transparent;background:transparent;color:var(--nmp-muted);font-size:12.5px;cursor:pointer;margin-bottom:-1px}
-.nmp-tab:hover{color:var(--nmp-ink)}
-.nmp-tab[data-on="1"]{color:var(--nmp-ink);border-bottom-color:var(--nmp-ink);font-weight:500}
-.nmp-tab__count{font:500 10px/1 var(--nmp-mono);padding:2px 5px;border-radius:4px;background:var(--nmp-raise);color:var(--nmp-muted)}
-.nmp-tab__dot{width:5px;height:5px;border-radius:50%;background:var(--nmp-accent)}
+.nmp-tabbar{display:inline-flex;flex-wrap:wrap;gap:2px;margin-top:24px;padding:3px;border:1px solid var(--nmp-line-strong);border-radius:9px;background:color-mix(in srgb,var(--nmp-ink) 4%,var(--nmp-bg));max-width:100%}
+.nmp-tab{appearance:none;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--nmp-muted);font-size:12.5px;font-weight:500;cursor:pointer;white-space:nowrap;transition:background-color .12s ease,color .12s ease,border-color .12s ease,box-shadow .12s ease}
+.nmp-tab .nmp-icon{color:currentColor;opacity:.7}
+.nmp-tab:hover{color:var(--nmp-ink);background:color-mix(in srgb,var(--nmp-ink) 6%,transparent)}
+.nmp-tab:hover .nmp-icon{opacity:1}
+.nmp-tab:focus-visible{outline:2px solid var(--nmp-accent);outline-offset:1px}
+.nmp-tab[aria-selected="true"]{background:var(--nmp-ink);border-color:var(--nmp-ink);color:var(--nmp-bg);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.18)}
+.nmp-tab[aria-selected="true"]:hover{background:var(--nmp-ink);color:var(--nmp-bg)}
+.nmp-tab[aria-selected="true"]:focus-visible{outline-color:var(--nmp-accent);outline-offset:2px}
+.nmp-tab[aria-selected="true"] .nmp-icon{color:currentColor;opacity:1}
+.nmp-tab__label{line-height:1}
+.nmp-tab__count{font:500 10px/1 var(--nmp-mono);padding:2px 5px;border-radius:4px;background:color-mix(in srgb,var(--nmp-ink) 8%,transparent);color:var(--nmp-muted)}
+.nmp-tab[aria-selected="true"] .nmp-tab__count{background:color-mix(in srgb,var(--nmp-bg) 22%,transparent);color:var(--nmp-bg)}
+.nmp-tab__dot{width:6px;height:6px;border-radius:50%;background:var(--nmp-warn);box-shadow:0 0 0 2px color-mix(in srgb,var(--nmp-bg) 80%,transparent);margin-left:-1px}
 
 /* toolbar */
 .nmp-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
@@ -2722,7 +2732,7 @@ window.__ModuleLoader__.load({
 .nmp-segmented{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--nmp-line);border-radius:7px;background:var(--nmp-raise)}
 .nmp-segmented__item{appearance:none;height:26px;padding:0 10px;border:0;border-radius:5px;background:transparent;color:var(--nmp-muted);font-size:11.5px;cursor:pointer}
 .nmp-segmented__item:hover{color:var(--nmp-ink)}
-.nmp-segmented__item[data-on="1"]{background:var(--nmp-surface);color:var(--nmp-ink);font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.nmp-segmented__item[aria-pressed="true"]{background:var(--nmp-surface);color:var(--nmp-ink);font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 
 /* detail */
 .nmp-detail{margin-top:18px}
@@ -2960,6 +2970,8 @@ window.__ModuleLoader__.load({
   .nmp-rules{grid-template-columns:1fr}
 }
 @container (max-width: 620px){
+  .nmp-tab{height:30px;padding:0 9px;font-size:12px;gap:5px}
+  .nmp-tabbar{margin-top:20px}
   .nmp-formgrid{grid-template-columns:1fr}
   .nmp-progressbar{grid-template-columns:1fr}
   .nmp-search{max-width:none;flex-basis:100%}

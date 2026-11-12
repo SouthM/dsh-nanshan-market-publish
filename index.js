@@ -1,5 +1,5 @@
 /**
- * Host half of 【南山】DSH插件市场发布.
+ * Host half of 【南山】DSH插件市场发布助手.
  *
  * The market list at https://github.com/awesome-dsh-plugin/awesome-dsh-plugin
  * holds one YAML file per plugin under `data/plugins/`. Getting a component

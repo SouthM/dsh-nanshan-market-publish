@@ -1,4 +1,4 @@
-# 【南山】DSH插件市场发布
+# 【南山】DSH插件市场发布助手
 
 左侧栏插件：扫描本机正在开发的 DSH 组件，按官方
 [contributing.md](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/blob/main/contributing.md)
@@ -27,7 +27,7 @@
 dsh plugin add /path/to/nanshan-market-publish
 ```
 
-或在 DSH 的 **插件** 页面选择 **添加插件** 并指向本目录。安装后在左侧栏点 **「插件市场发布」**。
+或在 DSH 的 **插件** 页面选择 **添加插件** 并指向本目录。安装后在左侧栏点 **「插件市场发布助手」**。面板分四个页签：**组件清单**、**发布引导**、**发布记录**、**设置**。
 
 ## 连接 GitHub
 
