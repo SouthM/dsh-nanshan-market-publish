@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Nanshan DSH Market Publish",
+    "description": "Scans DSH components under development on this machine (or folders you add) and walks you through two independent tracks from the official contributing.md: pushing the code to GitHub, and opening the market listing PR. It checks the dsh.bundle manifest, the one-day repository age, the dsh-plugin topic, the category and the description rules, then writes data/plugins/<owner>__<repo>.yml. Open Publish to market in the left sidebar. A GitHub token with public_repo scope is required; it is stored in the DSH credentials service and the PR is opened under your own account."
+  }
+}
