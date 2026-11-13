@@ -1670,8 +1670,12 @@ export function apply(ctx) {
       }
     } catch (error) {
       if (error?.status === 404) {
-        const file = await gh(token, 'GET', `/repos/${login}/${UPSTREAM.repo}/contents/${entry.computed.filePath}`)
-        if (file.data && typeof file.data.sha === 'string') existingSha = file.data.sha
+        try {
+          const file = await gh(token, 'GET', `/repos/${login}/${UPSTREAM.repo}/contents/${entry.computed.filePath}`)
+          if (file.data && typeof file.data.sha === 'string') existingSha = file.data.sha
+        } catch (inner) {
+          if (inner?.status !== 404) throw inner
+        }
       } else {
         throw error
       }
