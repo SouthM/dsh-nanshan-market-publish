@@ -2828,3 +2828,10 @@ function formatHours(days) {
 function shellQuote(value) {
   return `'${String(value).replace(/'/g, `'\\''`)}'`
 }
+
+function slugify(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
