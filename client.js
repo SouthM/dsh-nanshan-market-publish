@@ -2702,7 +2702,7 @@ window.__ModuleLoader__.load({
 .nmp-comp:hover .nmp-comp__go{opacity:1;color:var(--nmp-accent)}
 
 /* chips */
-.nmp-chip{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 7px;border-radius:5px;font:500 10px/1 var(--nmp-mono);letter-spacing:.01em;border:1px solid var(--nmp-line);background:var(--nmp-raise);color:var(--nmp-muted);white-space:nowrap;max-width:190px;overflow:hidden;text-overflow:ellipsis}
+.nmp-chip{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 7px;border-radius:5px;font:500 10px/1 var(--nmp-mono);letter-spacing:.01em;border:1px solid var(--nmp-line);background:var(--nmp-raise);color:var(--nmp-muted);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .nmp-chip--ok{color:var(--nmp-ok);border-color:color-mix(in srgb,var(--nmp-ok) 34%,var(--nmp-line));background:color-mix(in srgb,var(--nmp-ok) 8%,var(--nmp-raise))}
 .nmp-chip--warn{color:var(--nmp-warn);border-color:color-mix(in srgb,var(--nmp-warn) 34%,var(--nmp-line));background:color-mix(in srgb,var(--nmp-warn) 8%,var(--nmp-raise))}
 .nmp-chip--bad{color:var(--nmp-bad);border-color:color-mix(in srgb,var(--nmp-bad) 34%,var(--nmp-line));background:color-mix(in srgb,var(--nmp-bad) 8%,var(--nmp-raise))}
